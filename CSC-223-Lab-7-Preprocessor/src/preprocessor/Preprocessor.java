@@ -48,9 +48,9 @@ public class Preprocessor
 	{
 		_pointDatabase  = points;
 		_givenSegments = segments;
-		
+
 		_segmentDatabase = new HashMap<Segment, Segment>();
-		
+
 		analyze();
 	}
 
@@ -87,5 +87,25 @@ public class Preprocessor
 		_allMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
 		_nonMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
 	}
+
+
+
+	private Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
+
+
+		return null;
+	}
+	
+	private Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
+
+
+		return null;
+	}
+
+	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
+		return null;
+	}
+
+
 }
 
