@@ -1,17 +1,4 @@
-* Parses from a JSON file to an abstract syntax tree (AST)
- * JSON file looks like:
- * { "Triangle" :
- *   { "Description" : "triangle with three points",
- *     "Points" : [ { "name" : "A", "x" : 0, "y" : 0 }
- *                  { "name" : "B", "x" : 1, "y" : 1 }
- *                  { "name" : "C", "x" : 0, "y" : 1 }
- *                ]
- *     "Segments" : [ { "A" : ["B", "C"] }
- *                    { "B" : ["C", "A"] }
- *                    { "C" : ["B", "A"] }
- *                  ]
- *   }
- * }
+/*
  *  To a tree structure like:
  *               |-- Description
  *               |
