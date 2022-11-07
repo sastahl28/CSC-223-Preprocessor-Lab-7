@@ -47,10 +47,5 @@ public class ImplicitPointPreprocessor
 	}
 	
 	
-	public Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
-		
-		
-		return null;
-	}
-
+	
 }

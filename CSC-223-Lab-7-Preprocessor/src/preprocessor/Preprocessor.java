@@ -91,18 +91,19 @@ public class Preprocessor
 
 
 	private Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
-
+		//TODO
 
 		return null;
 	}
 	
 	private Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
-
+		//TODO
 
 		return null;
 	}
 
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
+		//TODO
 		return null;
 	}
 

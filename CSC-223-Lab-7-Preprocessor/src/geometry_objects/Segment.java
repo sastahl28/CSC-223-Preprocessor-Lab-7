@@ -1,5 +1,6 @@
 package geometry_objects;
 
+
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -11,7 +12,7 @@ import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
 import utilities.math.analytic_geometry.GeometryUtilities;
 
-public class Segment extends GeometricObjects
+public class Segment extends GeometricObject
 {
 	protected Point _point1;
 	protected Point _point2;
@@ -72,7 +73,18 @@ public class Segment extends GeometricObjects
 	{
         // TODO
 		
-		return true;
+		//create point list of all points on the segment
+		Set<Point> figurePoints = new TreeSet<Point>();//get all the points in here
+		
+		//
+		GeometricObject figure = 
+		
+		
+		for(Point p: figurePoints) {
+			if(candidate.pointLiesBetweenEndpoints(p)) {return true;}
+		}
+
+		return false;
 	}
 
 	/**
@@ -153,7 +165,15 @@ public class Segment extends GeometricObjects
 	public boolean coincideWithoutOverlap(Segment that)
 	{
         // TODO
-		return null;
+		//Do i need to check if they are both horizontal and/or both vertical
+		
+		//check that if slopes are different return false
+		if(!MathUtilities.doubleEquals(that.slope(), this.slope())) {return false;}
+		
+		//check if the endpoint of one if the endpoint of another
+		if(this.pointLiesBetweenEndpoints(that._point1) ||this.pointLiesBetweenEndpoints(that._point2)) {return false;}
+	
+		return true;
 	}
 	
 	/**
@@ -162,10 +182,15 @@ public class Segment extends GeometricObjects
 	 */
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
-		SortedSet<Point> pointsOn = new TreeSet<Point>();
+		//add the set of points to the sorted set
+		SortedSet<Point> pointsOn = new TreeSet<Point>(points);
 
-        // TODO
-
+        //loop through and verify that the points lies in the segment
+		for(Point p : points) {
+			if(this.pointLiesBetweenEndpoints(p)) {pointsOn.add(p);}
+		}
+	
+		//return the set of points in order
 		return pointsOn;
 	}
 }
