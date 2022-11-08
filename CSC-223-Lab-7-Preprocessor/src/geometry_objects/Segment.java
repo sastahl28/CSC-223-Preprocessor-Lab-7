@@ -71,18 +71,33 @@ public class Segment extends GeometricObject
 
 	public boolean HasSubSegment(Segment candidate)
 	{
-        // TODO
-		
-		//create point list of all points on the segment
-		Set<Point> figurePoints = new TreeSet<Point>();//get all the points in here
-		
-		//
-		GeometricObject figure = 
-		
-		
-		for(Point p: figurePoints) {
-			if(candidate.pointLiesBetweenEndpoints(p)) {return true;}
+
+		//check if the slopes are the same
+		if(!MathUtilities.doubleEquals(candidate.slope(), this.slope())) {return false;}
+
+
+		//check that the end points of both segments are not the same
+		if((this._point1.compareTo(candidate._point1) == 0) && 
+				(this._point2.compareTo(candidate._point2) == 0)) {
+			return false;
 		}
+		if((this._point1.compareTo(candidate._point2) == 0) && 
+				(this._point2.compareTo(candidate._point1) == 0)) {
+			return false;
+		}
+
+
+
+		//TODO QUESTIONS!!!
+		//what is there is one point of the candidate that intersects this segment like in a tangential way
+
+		//what is only one endpoint is on the segment and the other extends beyond this segment
+
+
+		// check if the whole segment is contained
+		if((this.pointLiesOn(candidate._point1) && this.pointLiesOn(candidate._point2))) {return true;}
+
+
 
 		return false;
 	}
@@ -108,7 +123,7 @@ public class Segment extends GeometricObject
 	public boolean equals(Object obj)
 	{
 		if (obj == null) return false;
-		
+
 		if (!(obj instanceof Segment)) return false;
 		Segment that = (Segment)obj;
 
@@ -164,18 +179,18 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-        // TODO
+		// TODO
 		//Do i need to check if they are both horizontal and/or both vertical
-		
+
 		//check that if slopes are different return false
 		if(!MathUtilities.doubleEquals(that.slope(), this.slope())) {return false;}
-		
+
 		//check if the endpoint of one if the endpoint of another
 		if(this.pointLiesBetweenEndpoints(that._point1) ||this.pointLiesBetweenEndpoints(that._point2)) {return false;}
-	
+
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @return the set of Points that lie on this segment (ordered lexicographically)
@@ -185,11 +200,11 @@ public class Segment extends GeometricObject
 		//add the set of points to the sorted set
 		SortedSet<Point> pointsOn = new TreeSet<Point>(points);
 
-        //loop through and verify that the points lies in the segment
+		//loop through and verify that the points lies in the segment
 		for(Point p : points) {
 			if(this.pointLiesBetweenEndpoints(p)) {pointsOn.add(p);}
 		}
-	
+
 		//return the set of points in order
 		return pointsOn;
 	}
