@@ -17,6 +17,12 @@ public class ImplicitPointPreprocessor
 	 * 
 	 * Algorithm:
 	 *    TODO
+	 *    mathematically:
+	 *    two segments in y=mx+b form
+	 *    set y's equal and solve for x
+	 *    if x is within the smallest domain then the intersection exists.
+	 *    
+	 *    
 	 *  1. Compute the set of implied points.
 	 *  make a list (or something) of the implied points and 
 	 *  calling the required methods
@@ -42,6 +48,11 @@ public class ImplicitPointPreprocessor
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
 
 		// TODO
+		//i=0
+		//i=j+1
+		//call segmentIntersection
+		//check that x,y are in segment 1 and segment 2
+		//if so add to implicitPoints
 
 		return implicitPoints;
 	}
