@@ -195,7 +195,7 @@ public class Segment extends GeometricObject
 
 		//loop through and verify that the points lies in the segment
 		for(Point p : points) {
-			if(this.pointLiesBetweenEndpoints(p)) {pointsOn.add(p);}
+			if(this.pointLiesOnSegment(p)) {pointsOn.add(p);}
 		}
 
 		//return the set of points in order
