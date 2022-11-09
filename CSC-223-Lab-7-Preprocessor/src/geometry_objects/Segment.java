@@ -73,28 +73,17 @@ public class Segment extends GeometricObject
 	{
 
 		//check if the slopes are the same
-		if(!MathUtilities.doubleEquals(candidate.slope(), this.slope())) {return false;}
+		if(!MathUtilities.doubleEquals(candidate.slope(), this.slope())) return false;
 
 		//if the two segments are the same 
-		if(this.equals(candidate)) {return false;}
-		
-		//check that the end points of both segments are not the same
-		if((this._point1.compareTo(candidate._point1) == 0) && 
-				(this._point2.compareTo(candidate._point2) == 0)) {
-			return false;
-		}
-		if((this._point1.compareTo(candidate._point2) == 0) && 
-				(this._point2.compareTo(candidate._point1) == 0)) {
-			return false;
-		}
-
+		if(this.equals(candidate)) return false;
 
 		// check if the whole segment is contained
-		if((this.pointLiesOn(candidate._point1) && this.pointLiesOn(candidate._point2))) {return true;}
+		if(!(this.pointLiesOn(candidate._point1) &&
+				this.pointLiesOn(candidate._point2))) return false;
 
-
-
-		return false;
+		//return true
+		return true;
 	}
 
 	/**
@@ -179,7 +168,8 @@ public class Segment extends GeometricObject
 		if(!MathUtilities.doubleEquals(that.slope(), this.slope())) {return false;}
 
 		//check if the endpoint of one if the endpoint of another
-		if(this.pointLiesBetweenEndpoints(that._point1) ||this.pointLiesBetweenEndpoints(that._point2)) {return false;}
+		if(this.pointLiesBetweenEndpoints(that._point1) ||
+				this.pointLiesBetweenEndpoints(that._point2)) {return false;}
 
 		return true;
 	}
