@@ -75,7 +75,9 @@ public class Segment extends GeometricObject
 		//check if the slopes are the same
 		if(!MathUtilities.doubleEquals(candidate.slope(), this.slope())) {return false;}
 
-
+		//if the two segments are the same 
+		if(this.equals(candidate)) {return false;}
+		
 		//check that the end points of both segments are not the same
 		if((this._point1.compareTo(candidate._point1) == 0) && 
 				(this._point2.compareTo(candidate._point2) == 0)) {
@@ -85,13 +87,6 @@ public class Segment extends GeometricObject
 				(this._point2.compareTo(candidate._point1) == 0)) {
 			return false;
 		}
-
-
-
-		//TODO QUESTIONS!!!
-		//what is there is one point of the candidate that intersects this segment like in a tangential way
-
-		//what is only one endpoint is on the segment and the other extends beyond this segment
 
 
 		// check if the whole segment is contained
