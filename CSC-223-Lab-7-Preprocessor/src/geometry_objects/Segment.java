@@ -174,8 +174,6 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-		// TODO
-		//Do i need to check if they are both horizontal and/or both vertical
 
 		//check that if slopes are different return false
 		if(!MathUtilities.doubleEquals(that.slope(), this.slope())) {return false;}
@@ -193,7 +191,7 @@ public class Segment extends GeometricObject
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
 		//add the set of points to the sorted set
-		SortedSet<Point> pointsOn = new TreeSet<Point>(points);
+		SortedSet<Point> pointsOn = new TreeSet<Point>();
 
 		//loop through and verify that the points lies in the segment
 		for(Point p : points) {
