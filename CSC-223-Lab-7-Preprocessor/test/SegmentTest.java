@@ -22,6 +22,7 @@ class SegmentTest {
 	Point p13 = new Point(2 ,10);
 	Point p14 = new Point(2 ,5);
 	Point p15 = new Point(2,6);
+	Point p16 = new Point(4 ,4);
 	
 	
 	Segment _a = new Segment(p2 , p3);
@@ -34,11 +35,14 @@ class SegmentTest {
 	Segment _h = new Segment(p11 , p13);
 	Segment _i = new Segment(p14 , p15);
 	Segment _j = new Segment(p7 , p1);
+	Segment _k = new Segment(p1 ,p1);
+	Segment _l = new Segment(p4 , p16);
 	
 	
 	@Test
 	void testGetPoint1() {
 		
+		//get the first point in various segments
 		assertEquals( p2 , _a.getPoint1());
 		assertEquals( p1 , _b.getPoint1());
 		assertEquals( p4 , _c.getPoint1());
@@ -50,20 +54,57 @@ class SegmentTest {
 	
 	@Test
 	void testGetPoint2() {
-		fail("Not yet implemented");
+		
+		//get the second point in various segments
+		assertEquals( p3 , _a.getPoint2());
+		assertEquals( p7 , _b.getPoint2());
+		assertEquals( p6 , _c.getPoint2());
+		assertEquals( p9 , _d.getPoint2());
+		assertEquals( p11 , _e.getPoint2());
+		assertEquals( p12 , _f.getPoint2());
 	}
 	
 	
 	@Test
 	void testLength() {
-		fail("Not yet implemented");
+		
+		//check the length of various segments 
+		assertEquals(4.0 , _a.length());
+		assertEquals(9.0 , _b.length());
+		assertEquals(3.0 , _c.length());
+		assertEquals(9.486832980505138 , _d.length());
+		assertEquals(4.47213595499958 , _e.length());
+		assertEquals(2.23606797749979, _f.length());
+		assertEquals(8.54400374531753 , _g.length());
+		assertEquals(1.0 , _i.length());
+		
+		//check the length of a segment where the endpoints are the same
+		assertEquals( 0.0 , _k.length());
+		
+		//check two segments that are the same length
+		assertEquals(_b.length() , _j.length());
+		
 	}
 	
 	
 	
 	@Test
 	void testSlope() {
-		fail("Not yet implemented");
+		
+		//test on segments that are horizontal
+		assertEquals( "Infinity" , _a.slope());
+		
+		//test on segments that are vertical
+		
+		
+		//test on other segments that are neither
+		
+		//compare slopes of horizontal segments
+		
+		//compare slopes of vertical segments
+		
+		//
+		
 	}
 	
 	
