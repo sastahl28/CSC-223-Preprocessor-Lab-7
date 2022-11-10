@@ -24,7 +24,7 @@ class PreprocessorTest
 	{
 		FigureNode fig = InputFacade.extractFigure("jsonfiles/fully_connected_irregular_polygon.json");
 
-		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig.toString());
+		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 
 		PointDatabase points = pair.getKey();
 

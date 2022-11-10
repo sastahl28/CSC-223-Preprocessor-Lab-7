@@ -42,10 +42,9 @@ public class InputFacade
 	 * @param filename
 	 * @return a pair <set of points as a database, set of segments>
 	 */
-	public static Map.Entry<PointDatabase, Set<Segment>> toGeometryRepresentation(String filename)
+	public static Map.Entry<PointDatabase, Set<Segment>> toGeometryRepresentation(FigureNode figNode)
 	{
 
-		FigureNode figNode = extractFigure(filename);
 		PointDatabase pointData = new PointDatabase();
 		LinkedHashSet<Segment> segData = new LinkedHashSet<Segment>();
 		
