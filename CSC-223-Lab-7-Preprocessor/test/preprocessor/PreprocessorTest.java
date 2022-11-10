@@ -22,9 +22,9 @@ class PreprocessorTest
 	@Test
 	void test_implicit_crossings()
 	{
-		FigureNode fig = InputFacade.extractFigure("fully_connected_irregular_polygon.json");
+		FigureNode fig = InputFacade.extractFigure("jsonfiles/fully_connected_irregular_polygon.json");
 
-		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
+		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig.toString());
 
 		PointDatabase points = pair.getKey();
 

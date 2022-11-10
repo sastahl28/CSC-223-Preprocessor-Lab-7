@@ -17,10 +17,11 @@ public class ImplicitPointPreprocessor
 	 * 
 	 * Algorithm:
 	 *    TODO
-	 *    mathematically:
-	 *    two segments in y=mx+b form
-	 *    set y's equal and solve for x
-	 *    if x is within the smallest domain then the intersection exists.
+	 *   //i=0
+		//i=j+1
+		//call segmentIntersection
+		//check that x,y are in segment 1 and segment 2
+		//if so add to implicitPoints
 	 *    
 	 *    
 	 *  1. Compute the set of implied points.
@@ -46,13 +47,34 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
-
-		// TODO
-		//i=0
-		//i=j+1
-		//call segmentIntersection
-		//check that x,y are in segment 1 and segment 2
-		//if so add to implicitPoints
+		
+		//begin with a segment from given segments
+		for (int i = 0; i < givenSegments.size()-1; i =+ 1) {
+			
+			
+			//for each segment AFTER that segment, compare
+			for (int j = i+1; j < givenSegments.size(); j=+1) {
+				
+				
+				Segment seg1 = new Segment(givenSegments.get(i));
+				Segment seg2 = new Segment(givenSegments.get(j));
+				
+				
+				//Get the point comprising where seg1 and seg2 would overlap
+				Point p = seg1.segmentIntersection(seg2);
+				
+				//If that point is within both endpoints add to implicit points
+				if (seg2.pointLiesBetweenEndpoints(p) && seg1.pointLiesBetweenEndpoints(p)) {
+					
+					//check that the point does not already exist
+					if (givenPoints.getPoint(p) == null) {
+						implicitPoints.add(p);
+					}				
+					
+				}
+					
+			}
+		}
 
 		return implicitPoints;
 	}
