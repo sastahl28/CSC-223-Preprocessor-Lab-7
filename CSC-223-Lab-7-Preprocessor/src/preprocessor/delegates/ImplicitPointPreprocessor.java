@@ -49,11 +49,11 @@ public class ImplicitPointPreprocessor
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
 		
 		//begin with a segment from given segments
-		for (int i = 0; i < givenSegments.size()-1; i =+ 1) {
+		for (int i = 0; i < givenSegments.size()-1; i++ ) {
 			
 			
 			//for each segment AFTER that segment, compare
-			for (int j = i+1; j < givenSegments.size(); j=+1) {
+			for (int j = i+1; j < givenSegments.size(); j++) {
 				
 				
 				Segment seg1 = new Segment(givenSegments.get(i));
