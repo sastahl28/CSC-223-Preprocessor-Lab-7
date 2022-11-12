@@ -197,5 +197,11 @@ public class Segment extends GeometricObject
 		//return the set of points in order
 		return pointsOn;
 	}
+	
+	@Override
+	public String toString()
+	{
+	    return "Segment(" + _point1.toString() + ", " + _point2.toString() + ")";	
+	}
 
 }

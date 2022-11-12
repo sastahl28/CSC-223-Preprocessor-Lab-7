@@ -618,7 +618,7 @@ class PreprocessorTest
 		Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
 		assertEquals(5, iPoints.size());
 
-		System.out.println(iPoints);
+		//System.out.println(iPoints);
 
 		//
 		//
@@ -687,31 +687,15 @@ class PreprocessorTest
 		expectedMinimalSegments.add(new Segment(points.getPoint("C"), points.getPoint("D")));
 		expectedMinimalSegments.add(new Segment(points.getPoint("D"), points.getPoint("E")));
 		expectedMinimalSegments.add(new Segment(points.getPoint("E"), points.getPoint("A")));
-		
-		Segment seg1 = new Segment(points.getPoint("A"), points.getPoint("B"));
-		Segment seg2 = new Segment(points.getPoint("B"), points.getPoint("C"));
-		Segment seg3 = new Segment(points.getPoint("C"), points.getPoint("D"));
-		Segment seg4 = new Segment(points.getPoint("D"), points.getPoint("E"));
-		Segment seg5 = new Segment(points.getPoint("E"), points.getPoint("A"));
-		
-		
+				
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(iPoints, segments, iSegments);
 		assertEquals(expectedMinimalSegments.size(), minimalSegments.size());
-
-		System.out.println();
-		System.out.println(expectedMinimalSegments.size());
 		
-		//for (Segment minimalSeg : minimalSegments)
-		//{
-			//assertTrue(expectedMinimalSegments.contains(minimalSeg));
-		//}
-		/*
-		 * assertTrue(minimalSegments.contains(seg1));
-		 * assertTrue(minimalSegments.contains(seg2));
-		 * assertTrue(minimalSegments.contains(seg3));
-		 * assertTrue(minimalSegments.contains(seg4));
-		 * assertTrue(minimalSegments.contains(seg5));
-		 */
+		
+		for (Segment minimalSeg : minimalSegments)
+		{
+			assertTrue(expectedMinimalSegments.contains(minimalSeg));
+		}
 
 		
 		//
