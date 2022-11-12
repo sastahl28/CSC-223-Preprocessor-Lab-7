@@ -25,7 +25,7 @@ public class Segment extends GeometricObject
 	public double length() { 
 		_length = GeometryUtilities.distance(_point1 , _point2);
 		return _length;
-		}
+	}
 	public double slope()
 	{
 		try { return GeometryUtilities.slope(_point1, _point2); }
@@ -167,12 +167,16 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
 
-		//check that if slopes are different return false
-		if(!MathUtilities.doubleEquals(that.slope(), this.slope())) {return false;}
+		//check that if slopes are different 
+		if(!this.isCollinearWith(that)) return false;
 
 		//check if the endpoint of one if the endpoint of another
 		if(this.pointLiesBetweenEndpoints(that._point1) ||
-				this.pointLiesBetweenEndpoints(that._point2)) {return false;}
+				this.pointLiesBetweenEndpoints(that._point2)) return false;
+
+		//check if the endpoint of one if the endpoint of another
+		if(that.pointLiesBetweenEndpoints(this._point1) ||
+				that.pointLiesBetweenEndpoints(this._point2)) return false;
 
 		return true;
 	}
@@ -194,5 +198,5 @@ public class Segment extends GeometricObject
 		//return the set of points in order
 		return pointsOn;
 	}
-	
+
 }

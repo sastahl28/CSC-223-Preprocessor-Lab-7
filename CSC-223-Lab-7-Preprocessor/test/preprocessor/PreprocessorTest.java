@@ -121,7 +121,7 @@ class PreprocessorTest
 		
 		//
 		// All Segments will consist of the new 15 non-minimal segments.
-		//
+		// 
 		assertEquals(15, computedNonMinimalSegments.size());
 
 		//
