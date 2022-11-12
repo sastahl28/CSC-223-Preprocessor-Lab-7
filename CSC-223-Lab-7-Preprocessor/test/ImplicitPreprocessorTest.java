@@ -146,6 +146,23 @@ class ImplicitPreprocessorTest {
 	}
 	
 	@Test
+	void Crossed_LinesTest() {
+		FigureNode figNode = InputFacade.extractFigure("jsonfiles/crossed_lines.json");
+		Map.Entry<PointDatabase, Set<Segment>> map = InputFacade.toGeometryRepresentation(figNode);
+		
+		PointDatabase database = map.getKey();
+		Set<Segment> segSet = map.getValue();
+		
+		Set<Point> impPoint = ImplicitPointPreprocessor.compute(database, segSet.stream().toList());
+		
+		assertEquals(1,impPoint.size());
+		
+		Point p1 = new Point(3,4);
+		assertTrue(impPoint.contains(p1));
+
+	}
+	
+	@Test
 	void overlapping_rectangleTest() {
 		FigureNode figNode = InputFacade.extractFigure("jsonfiles/Overlapping_Rectangles.json");
 		Map.Entry<PointDatabase, Set<Segment>> map = InputFacade.toGeometryRepresentation(figNode);
