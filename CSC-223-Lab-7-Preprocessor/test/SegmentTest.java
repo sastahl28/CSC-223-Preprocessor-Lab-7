@@ -339,7 +339,6 @@ class SegmentTest {
 		//test on segments that are the same with name
 		assertTrue(_b.equals(_j));
 
-
 		//test on segment that have inverse points
 		assertFalse(_i.equals(_l));
 

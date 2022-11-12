@@ -441,7 +441,7 @@ class PreprocessorTest
 		Segment b1 = new Segment(p1, p2);
 		Segment b2 = new Segment(p3, p4);
 		
-		//assertTrue(nonMinimal.contains(b1));
+		assertTrue(nonMinimal.contains(b1));
 		assertTrue(nonMinimal.contains(b2));	
 		
 		
