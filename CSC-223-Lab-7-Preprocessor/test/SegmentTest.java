@@ -283,6 +283,7 @@ class SegmentTest {
 	}
 
 
+	
 
 	@Test
 	void testSharedVertex() {
@@ -316,23 +317,31 @@ class SegmentTest {
 
 	@Test
 	void testEquals() {
-		fail("Not yet implemented");
 
 		//test on two very different segments
-
-
-
+		assertFalse(_a.equals(_g));
+		assertFalse(_e.equals(_m));
+		assertFalse(_k.equals(_a));
+		assertFalse(_m.equals(_c));
 
 		//test on segments that intersect
+		
+		assertFalse(_b.equals(_a));
+		assertFalse(_b.equals(_l));
+		assertFalse(_e.equals(_b));
 
 
 		//test on segments that overlap
-
+		assertFalse(_b.equals(_c));
+		assertFalse(_m.equals(_b));
+		assertFalse(_c.equals(_m));
 
 		//test on segments that are the same with name
+		assertTrue(_b.equals(_j));
 
 
 		//test on segment that have inverse points
+		assertFalse(_i.equals(_l));
 
 	}
 
