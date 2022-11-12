@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -139,7 +141,7 @@ public class Preprocessor
 	//private
 	protected Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
 		Set<Segment> segSet = new LinkedHashSet<Segment>();
- 		//segSet.addAll(implicitSegments);
+ 		segSet.addAll(implicitSegments);
 		
 		
 		for (Segment seg: givenSegments) {
@@ -161,18 +163,7 @@ public class Preprocessor
 				
 			}
 		}
-		
-		
-		
-		  for (Segment imp: implicitSegments) { boolean isMinimal = true;
-		  
-		  for (Segment imp2: implicitSegments) { if (!(imp.equals(imp2))){
-		  if(imp.HasSubSegment(imp2)) { isMinimal = false; } } }
-		  
-		  if (isMinimal) { segSet.add(imp); } }
-		 
-		 
-		  
+				  
 		  return segSet;
 		 
 	}
@@ -181,45 +172,37 @@ public class Preprocessor
 	protected Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
 		Set<Segment> allSegs = new LinkedHashSet<Segment>();
 		
-		List<Segment> allMin = allMinimalSegments.stream().toList();
+		Queue<Segment> workList = new LinkedList<Segment>();
 		
-		for (int i = 0; i < allMin.size() - 1; i++) {
-			for(int j=i+1; j < allMin.size(); j++) {
-				
-				Segment seg1 = allMin.get(i);
-				Segment seg2 = allMin.get(j);
-				
-				if (seg1.coincideWithoutOverlap(seg2)) {
-						
-						Segment s1 = new Segment(seg1.getPoint1(), seg2.getPoint1());
-						Segment s2 = new Segment(seg1.getPoint1(), seg2.getPoint2());
-						Segment s3 = new Segment(seg1.getPoint2(), seg2.getPoint1());
-						Segment s4 = new Segment(seg1.getPoint2(), seg2.getPoint2());
-						
-						if ((s1.HasSubSegment(seg1)) && (s1.HasSubSegment(seg2))) {
-							allSegs.add(s1);
-						}
-						
-						if ((s2.HasSubSegment(seg1)) && (s2.HasSubSegment(seg2))) {
-							allSegs.add(s2);
-						}
-						
-						if ((s3.HasSubSegment(seg1)) && (s3.HasSubSegment(seg2))) {
-							allSegs.add(s3);
-						}
-						
-						if ((s4.HasSubSegment(seg1)) && (s4.HasSubSegment(seg2))) {
-							allSegs.add(s4);
-						}
+		workList.addAll(allMinimalSegments);
+		
+		while (!(workList.isEmpty())) {
+			
+			Segment seg1 = workList.remove();
+			
+			for (Segment seg2 : allMinimalSegments) {
+				if (!(seg1.equals(seg2))) {
 					
+					if (seg1.coincideWithoutOverlap(seg2)) {
+						
+						Point p = seg1.sharedVertex(seg2);
+						
+						if(p != null) {
+							
+							Segment newSeg = new Segment(seg1.other(p), seg2.other(p));
+							allSegs.add(newSeg);
+							workList.add(newSeg);
+							
+						}
+						
 					}
 				}
 			}
-		
-		
-			
+		}			
 			return allSegs;
 	}
+	
+
 
 
 }
