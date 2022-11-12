@@ -194,7 +194,6 @@ public class Preprocessor
 							workList.add(newSeg);
 							
 						}
-						
 					}
 				}
 			}

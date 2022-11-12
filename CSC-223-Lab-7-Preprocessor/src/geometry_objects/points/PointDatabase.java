@@ -94,7 +94,7 @@ public class PointDatabase
 		List<Point> pointList = new ArrayList<Point>(_factory.getAllPoints());
 		
 		for(Point p: pointList) {
-			if(p._name == name) {return p;}
+			if(p._name.equals(name)) {return p;}
 		}
 		return null;
 		
