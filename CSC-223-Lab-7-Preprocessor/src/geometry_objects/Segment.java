@@ -167,7 +167,6 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
 
-		//check that if slopes are different 
 		if(!this.isCollinearWith(that)) return false;
 
 		//check if the endpoint of one if the endpoint of another
