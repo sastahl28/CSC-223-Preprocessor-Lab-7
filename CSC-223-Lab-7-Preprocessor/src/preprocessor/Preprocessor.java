@@ -2,6 +2,7 @@ package preprocessor;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -89,22 +90,135 @@ public class Preprocessor
 	}
 
 
+	protected Set<Segment> getSegments(SortedSet<Point> point){
+		
+		Set<Segment> SegSet = new LinkedHashSet<Segment>(); 
+		
+		List<Point> sortedList = point.stream().toList();
+		
+		for (int p=0; p < sortedList.size() -1; p++) {
+			
+			Point Left = sortedList.get(p);
+			Point Right = sortedList.get(p+1);
+			
+			Segment seg = new Segment(Left, Right);
+			SegSet.add(seg);
+			Left = Right;
+		}
+		
 
-	private Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
-		//TODO
+		return SegSet;
+	}
 
-		return null;
+	protected Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
+		
+		Set<Segment> segSet = new LinkedHashSet<Segment>();
+		
+		for (Segment s: _givenSegments) {
+			
+			SortedSet<Point> pointSet = s.collectOrderedPointsOnSegment(implicitPoints);
+			
+			if (!(pointSet.isEmpty())) {
+				
+				pointSet.add(s.getPoint1());
+				pointSet.add(s.getPoint2());
+				
+				Set<Segment> orderedSet = this.getSegments(pointSet);
+				
+				segSet.addAll(orderedSet);
+				
+				
+			}
+			
+			
+		}
+		
+		return segSet;
 	}
 	
-	private Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
-		//TODO
-
-		return null;
+	//private
+	protected Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
+		Set<Segment> segSet = new LinkedHashSet<Segment>();
+ 		//segSet.addAll(implicitSegments);
+		
+		
+		for (Segment seg: givenSegments) {
+			
+			boolean isMinimal = true;
+			
+			//implied points
+			for (Point imp: implicitPoints) {
+				
+				if (seg.pointLiesBetweenEndpoints(imp)){
+					
+					isMinimal=false;
+				}	
+			}
+			
+			if (isMinimal) {
+				
+				segSet.add(seg);
+				
+			}
+		}
+		
+		
+		
+		  for (Segment imp: implicitSegments) { boolean isMinimal = true;
+		  
+		  for (Segment imp2: implicitSegments) { if (!(imp.equals(imp2))){
+		  if(imp.HasSubSegment(imp2)) { isMinimal = false; } } }
+		  
+		  if (isMinimal) { segSet.add(imp); } }
+		 
+		 
+		  
+		  return segSet;
+		 
 	}
 
-	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
-		//TODO
-		return null;
+
+	protected Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
+		Set<Segment> allSegs = new LinkedHashSet<Segment>();
+		
+		List<Segment> allMin = allMinimalSegments.stream().toList();
+		
+		for (int i = 0; i < allMin.size() - 1; i++) {
+			for(int j=i+1; j < allMin.size(); j++) {
+				
+				Segment seg1 = allMin.get(i);
+				Segment seg2 = allMin.get(j);
+				
+				if (seg1.coincideWithoutOverlap(seg2)) {
+						
+						Segment s1 = new Segment(seg1.getPoint1(), seg2.getPoint1());
+						Segment s2 = new Segment(seg1.getPoint1(), seg2.getPoint2());
+						Segment s3 = new Segment(seg1.getPoint2(), seg2.getPoint1());
+						Segment s4 = new Segment(seg1.getPoint2(), seg2.getPoint2());
+						
+						if ((s1.HasSubSegment(seg1)) && (s1.HasSubSegment(seg2))) {
+							allSegs.add(s1);
+						}
+						
+						if ((s2.HasSubSegment(seg1)) && (s2.HasSubSegment(seg2))) {
+							allSegs.add(s2);
+						}
+						
+						if ((s3.HasSubSegment(seg1)) && (s3.HasSubSegment(seg2))) {
+							allSegs.add(s3);
+						}
+						
+						if ((s4.HasSubSegment(seg1)) && (s4.HasSubSegment(seg2))) {
+							allSegs.add(s4);
+						}
+					
+					}
+				}
+			}
+		
+		
+			
+			return allSegs;
 	}
 
 
