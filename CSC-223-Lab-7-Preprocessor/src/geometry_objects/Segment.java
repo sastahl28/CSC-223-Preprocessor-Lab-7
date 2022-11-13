@@ -74,19 +74,14 @@ public class Segment extends GeometricObject
 
 	public boolean HasSubSegment(Segment candidate)
 	{
-
-		//check if the slopes are the same
-		if(!MathUtilities.doubleEquals(candidate.slope(), this.slope())) return false;
-
-		//if the two segments are the same 
-		if(this.equals(candidate)) return false;
+		
 
 		// check if the whole segment is contained
-		if(!(this.pointLiesOn(candidate._point1) &&
-				this.pointLiesOn(candidate._point2))) return false;
+		if(this.pointLiesOnSegment(candidate._point1) &&
+				this.pointLiesOnSegment(candidate._point2)) return true;
 
 		//return true
-		return true;
+		return false;
 	}
 
 	/**
