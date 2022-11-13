@@ -74,7 +74,6 @@ public class Segment extends GeometricObject
 
 	public boolean HasSubSegment(Segment candidate)
 	{
-		
 
 		// check if the whole segment is contained
 		if(this.pointLiesOnSegment(candidate._point1) &&
