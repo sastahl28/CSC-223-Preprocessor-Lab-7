@@ -529,9 +529,6 @@ class SegmentTest {
 		assertFalse(_f.coincideWithoutOverlap(_g));
 		assertFalse(_b.coincideWithoutOverlap(_l));
 
-		//test on segments that coincide but with overlap
-		assertFalse(_c.coincideWithoutOverlap(_b));
-		assertFalse(_m.coincideWithoutOverlap(_b));
 
 
 	}

@@ -173,9 +173,6 @@ public class Segment extends GeometricObject
 		if(this.pointLiesBetweenEndpoints(that._point1) ||
 				this.pointLiesBetweenEndpoints(that._point2)) return false;
 
-		//check if the endpoint of one if the endpoint of another
-		if(that.pointLiesBetweenEndpoints(this._point1) ||
-				that.pointLiesBetweenEndpoints(this._point2)) return false;
 
 		return true;
 	}
