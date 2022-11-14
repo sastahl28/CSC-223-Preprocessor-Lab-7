@@ -598,5 +598,4 @@ class SegmentTest {
 	}
 
 
-
 }
