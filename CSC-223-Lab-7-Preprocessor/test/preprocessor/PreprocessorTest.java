@@ -39,6 +39,9 @@ class PreprocessorTest
 		/**
 		 * 
 		 * COMPUTE IMPLICIT BASE SEGMENTS
+		 * 
+		 * 
+		 * 
 		 */
 		
 		implicitBaseSegments = pp.computeImplicitBaseSegments(impPoint);
@@ -49,6 +52,9 @@ class PreprocessorTest
 		 * 
 		 * 
 		 * COMPUTE MINIMAL SEGMENTS
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -63,7 +69,14 @@ class PreprocessorTest
 		assertTrue(minimalSeg.contains(seg));
 		
 		/**
+		 * 
+		 * 
+		 * 
 		 * ALL NONMINIMAL SEGMENTS
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);
@@ -88,7 +101,16 @@ class PreprocessorTest
 		Set<Segment> implicitBaseSegments = new LinkedHashSet<Segment>();
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
 		 * IMPLICITE BASE SEGMENTS
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		implicitBaseSegments = pp.computeImplicitBaseSegments(impPoint);
@@ -96,7 +118,16 @@ class PreprocessorTest
 		assertEquals(0,implicitBaseSegments.size());
 		
 		 /**
+		  * 
+		  * 
+		  * 
+		  * 
 		  * COMPUTE MINIMAL
+		  * 
+		  * 
+		  * 
+		  * 
+		  * 
 		  */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -116,7 +147,17 @@ class PreprocessorTest
 		assertTrue(minimalSeg.contains(seg3));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * NON MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);
@@ -139,7 +180,19 @@ class PreprocessorTest
 		Set<Segment> implicitBaseSegments = new LinkedHashSet<Segment>();
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE IMPLICIT
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		implicitBaseSegments = pp.computeImplicitBaseSegments(impPoint);
@@ -148,7 +201,16 @@ class PreprocessorTest
 		
 		/**
 		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -175,7 +237,17 @@ class PreprocessorTest
 		assertTrue(minimalSeg.contains(seg5));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * NONMINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
 		 * 
 		 */
 		
@@ -240,7 +312,18 @@ class PreprocessorTest
 		assertTrue(implicitBaseSegments.contains(seg4));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -277,7 +360,18 @@ class PreprocessorTest
 		assertTrue(minimalSeg.contains(s10));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE NONMINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);
 		assertEquals(4,nonMinimal.size());
@@ -328,7 +422,18 @@ class PreprocessorTest
 		assertTrue(implicitBaseSegments.contains(seg4));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -366,7 +471,16 @@ class PreprocessorTest
 		 * 
 		 * 
 		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * NON MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * 
 		 */
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);
@@ -415,7 +529,18 @@ class PreprocessorTest
 		assertTrue(implicitBaseSegments.contains(seg4));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * COMPUTE MINIMAL
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		
@@ -433,6 +558,9 @@ class PreprocessorTest
 		 * 
 		 * 
 		 * NON MINIMAL
+		 * 
+		 * 
+		 * 
 		 * 
 		 */
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);
@@ -524,7 +652,19 @@ class PreprocessorTest
 		
 		/**
 		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * MINIMAL SEGMENTS
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(impPoint, segSet, implicitBaseSegments);
@@ -549,7 +689,17 @@ class PreprocessorTest
 		assertTrue(minimalSeg.contains(seg16));
 		
 		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * NON MINIMAL SEGMENTS
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
 		
 		Set<Segment> nonMinimal = pp.constructAllNonMinimalSegments(minimalSeg);

@@ -1,4 +1,9 @@
 { 
+//         B
+//         |\
+//         | \
+//         |__\
+//         A  C
 "Figure" :
   { "Description" : "Right Triangle in the first quadrant.",
     "Points" :
