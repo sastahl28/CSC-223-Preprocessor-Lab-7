@@ -89,64 +89,110 @@ public class Preprocessor
 		_nonMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
 	}
 
-
+	/**
+	 * Create a set of segments out of a sorted list of points
+	 * 
+	 * Ex: The list {(0,0), (1,0), (2,0)} would become the set
+	 * { Segment((0,0),(1,0)), Segment((1,0),(2,0)) }
+	 * 
+	 * @param point
+	 * @return
+	 */
 	protected Set<Segment> getSegments(SortedSet<Point> point){
+		
 		
 		Set<Segment> SegSet = new LinkedHashSet<Segment>(); 
 		
+		
 		List<Point> sortedList = point.stream().toList();
 		
+		
+		//for each point in the sorted list, create a segment with the next point to the right
 		for (int p=0; p < sortedList.size() -1; p++) {
+			
 			
 			Point Left = sortedList.get(p);
 			Point Right = sortedList.get(p+1);
 			
+			
 			Segment seg = new Segment(Left, Right);
+			
+			
 			SegSet.add(seg);
+			
+			
 			Left = Right;
+			
 		}
 		
-
 		return SegSet;
 	}
 
+	/**
+	 * Find all the segments created from the implicit points
+	 * 
+	 * Ex: Segment A-------X-------B where X is implict returns segments (A,X) and (X,B)
+	 * 
+	 * 
+	 * @param implicitPoints
+	 * @return
+	 */
 	protected Set<Segment> computeImplicitBaseSegments(Set<Point> implicitPoints){
 		
 		Set<Segment> segSet = new LinkedHashSet<Segment>();
 		
+		//For each given segment, if an implicit point is contained on the segment, chop the segment up at the implicit point
 		for (Segment s: _givenSegments) {
 			
+			
+			//gets all implicit points on the segment
 			SortedSet<Point> pointSet = s.collectOrderedPointsOnSegment(implicitPoints);
 			
+			
+			//if there are implicit points, chop the original segment
 			if (!(pointSet.isEmpty())) {
+				
 				
 				pointSet.add(s.getPoint1());
 				pointSet.add(s.getPoint2());
 				
+				
 				Set<Segment> orderedSet = this.getSegments(pointSet);
+				
 				
 				segSet.addAll(orderedSet);
 				
-				
 			}
-			
 			
 		}
 		
 		return segSet;
 	}
 	
-	//private
+	/**
+	 * Identify all minimal segments
+	 * 
+	 * Ex:
+	 * A------X------B
+	 * Minimal segments: (A,X), (X,B)
+	 * 
+	 * @param implicitPoints
+	 * @param givenSegments
+	 * @param implicitSegments
+	 * @return
+	 */
 	protected Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints , Set<Segment> givenSegments , Set<Segment> implicitSegments){
+		
 		Set<Segment> segSet = new LinkedHashSet<Segment>();
  		segSet.addAll(implicitSegments);
 		
-		
+		//For each segment, if it does NOT contain an implicit point, add it to set
 		for (Segment seg: givenSegments) {
+			
 			
 			boolean isMinimal = true;
 			
-			//implied points
+			//if the segment contains an implicit point then it is not minimal
 			for (Point imp: implicitPoints) {
 				
 				if (seg.pointLiesBetweenEndpoints(imp)){
@@ -155,11 +201,13 @@ public class Preprocessor
 				}	
 			}
 			
+			
 			if (isMinimal) {
 				
 				segSet.add(seg);
 				
 			}
+			
 		}
 				  
 		  return segSet;
@@ -167,24 +215,50 @@ public class Preprocessor
 	}
 
 
+	/**
+	 * Given all our minimal segments, create a set of all NON minimal segments
+	 * 
+	 * Ex: A-------X-------B-------C
+	 * Non minimal: (A,B), (A,C), (X,C)
+	 * 
+	 * @param allMinimalSegments
+	 * @return
+	 */
 	protected Set<Segment> constructAllNonMinimalSegments(Set<Segment> allMinimalSegments){
+		
 		Set<Segment> allSegs = new LinkedHashSet<Segment>();
 		
 		Queue<Segment> workList = new LinkedList<Segment>();
 		
+		
+		//Create a list of all minimal segments
 		workList.addAll(allMinimalSegments);
+		
+		//while the list is not empty, remove the top segment and compare it to all other minimal segments
+		//If the two segments are colinear and share a vertex, create a new segment out of them 
+		//add the big segment to the work list
 		
 		while (!(workList.isEmpty())) {
 			
+			
 			Segment seg1 = workList.remove();
 			
+			
 			for (Segment seg2 : allMinimalSegments) {
+				
+				
+				//check they are not the same segment
 				if (!(seg1.equals(seg2))) {
+					
 					
 					if (seg1.coincideWithoutOverlap(seg2)) {
 						
+						
+						
 						Point p = seg1.sharedVertex(seg2);
 						
+						
+						//if the two segments share a vertex create a segment out of the non-shared points
 						if(p != null) {
 							
 							Segment newSeg = new Segment(seg1.other(p), seg2.other(p));
