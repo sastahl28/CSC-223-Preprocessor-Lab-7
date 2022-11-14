@@ -11,7 +11,13 @@ import geometry_objects.delegates.intersections.IntersectionDelegate;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
 import utilities.math.analytic_geometry.GeometryUtilities;
-
+/*
+ * A class with methods designated for segments looking at relationships
+ * between segments
+ * 
+ * @author Sally Stahl
+ * @date November 11th, 2022
+ */
 public class Segment extends GeometricObject
 {
 	protected Point _point1;
@@ -75,11 +81,11 @@ public class Segment extends GeometricObject
 	public boolean HasSubSegment(Segment candidate)
 	{
 
-		// check if the whole segment is contained
+		// check if subsegment is containede
 		if(this.pointLiesOnSegment(candidate._point1) &&
 				this.pointLiesOnSegment(candidate._point2)) return true;
 
-		//return true
+		//return false
 		return false;
 	}
 
